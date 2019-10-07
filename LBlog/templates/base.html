@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}
+        {# title here #}
+    {% endblock %}</title>
+    <link rel="stylesheet" href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    {% block style %}
+        {# extra css file here #}
+        {# local css file or cdn link #}
+    {% endblock %}
+</head>
+<body>
+{% block content %}
+    {# content here #}
+{% endblock %}
+</body>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.bootcss.com/popper.js/1.15.0/esm/popper.min.js"></script>
+    {% block script %}
+        {# extra js file here #}
+        {# local js file or cdn link #}
+    {% endblock %}
+</html>
+
+{# created by lily when he was young #}
+{# so that he could know how sucks he was #}
