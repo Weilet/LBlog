@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}
+    关于
+{% endblock %}
+{% block style %}
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300&display=swap" rel="stylesheet">
+{% endblock %}
+{% block content %}
+    {% include "navbar.html" %}
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-sm-10 offset-sm-1">
+                <div class="contain">
+                    <blockquote>
+                        二十岁，是学生； <br/>
+                        好读书，不求甚解，尤喜科幻，常神游其中；<br/>
+                        坚定地相信帕斯卡尔，认为人是一根会思考的芦苇； <br/>
+                        因此总异想天开，虚度不少光阴。
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include "footer.html" %}
+{% endblock %}

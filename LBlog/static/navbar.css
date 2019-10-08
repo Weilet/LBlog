@@ -1,0 +1,32 @@
+.dropdown-item:hover {
+    background-color: #dae0e5;
+    transition: ease 1s;
+}
+
+.underline {
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+
+    display: inline-block;
+    padding: 15px 20px;
+    position: relative;
+}
+
+.underline:after {
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 2px;
+    left: 50%;
+    position: absolute;
+    background: #333;
+    transition: ease .5s;
+    width: 0;
+}
+
+.underline:hover:after {
+    width: 100%;
+    left: 0;
+}

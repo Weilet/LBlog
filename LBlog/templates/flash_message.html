@@ -1,11 +1,8 @@
-{% macro render_flashed_message() %}
-    <div class="container-fluid" style="position: absolute; bottom: 5%">
+<div class="container-fluid" style="position: absolute; bottom: 5%">
         {% for message in get_flashed_messages() %}
             <div class="alert alert-warning">
                 {{ message }}
                 <button type="button" class="close" data-dismiss="alert">&times;</button>
             </div>
-
         {% endfor %}
-    </div>
-{% endmacro %}
+</div>

@@ -13,11 +13,12 @@ class User(db.Model, UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), unique=True, index=True)
+    about = db.Column(db.Text)
     password_hash = db.Column(db.String(128))
 
     @property
     def password(self):
-        raise AttributeError('password is not readable')
+        raise AttributeError('密码是只读的')
 
     @password.setter
     def password(self, password):

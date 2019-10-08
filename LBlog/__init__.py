@@ -9,10 +9,10 @@ from config import config
 bootstrap = Bootstrap()
 db = SQLAlchemy()
 login_manager = LoginManager()
+login_manager.login_message = '需要登陆'
 login_manager.login_view = 'auth.login'
 ckeditor = CKEditor()
 migrate = Migrate()
-
 
 def creat_app(config_name):
     """

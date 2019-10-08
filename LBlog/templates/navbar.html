@@ -1,33 +1,51 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand">LBlog</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <a class="navbar-brand">LBlog</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" >Home</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" >Message</a>
-      </
-        li>
-      <li class="nav-item">
-        <a class="nav-link">About</a>
-      </li>
-    </ul>
-    {% if current_user.is_authenticated %}
-        <form class="form-inline mr-sm-2" action="{{ url_for('auth.logout') }}" method="post">
-            <span class="navbar-text mr-sm-2 text-dark" style="box-shadow: 0 2px #888;">
-                <b>{{ current_user.username }}</b>
-            </span>
-            <button class="btn btn-danger" type="submit">Logout</button>
+    <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link underline {% if request.endpoint == 'blog.index' %}active{% endif %}"
+                   href="{{ url_for('blog.index') }}">
+                    首页
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link underline {% if request.endpoint == 'blog.friend' %}active{% endif %}"
+                   href="{{ url_for('blog.friend') }}">
+                    友链
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link underline {% if request.endpoint == 'blog.about' %}active{% endif %}"
+                   href="{{ url_for('blog.about') }}">
+                    关于
+                </a>
+            </li>
+        </ul>
+        {% if current_user.is_authenticated %}
+            <form class="form-inline mr-sm-2" action="{{ url_for('auth.logout') }}" method="post">
+                <div class="dropdown">
+                    <button type="button" class="btn btn-outline-info mr-2 dropdown-toggle" data-toggle="dropdown">
+                       {{ current_user.username }}
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="{{ url_for('blog.post') }}">发布新文章</a>
+                        <a class="dropdown-item" href="{{ url_for('auth.setting') }}">设置</a>
+                    </div>
+                </div>
+                <button class="btn btn-outline-danger" type="submit">登出</button>
+            </form>
+        {% elif not current_user.isauthenticated and request.endpoint != 'auth.login' %}
+            <form class="form-inline mr-sm-2" action="{{ url_for('auth.login') }}">
+                <button class="btn btn-outline-info" type="submit">登陆</button>
+            </form>
+        {% endif %}
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="搜索" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
         </form>
-    {% endif %}
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
+    </div>
 </nav>
