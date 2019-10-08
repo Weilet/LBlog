@@ -1,0 +1,15 @@
+blockquote {
+    background-size: 85px auto;
+    background: #A32A5C url(https://www.dropbox.com/s/prnmbmxdghlyj78/quote.svg?raw=1) no-repeat 20px 20px;
+    padding: 40px 25px 25px 40px;
+  font-size: 28px;
+  line-height: 150%;
+  font-family: 'Open Sans', sans-serif;
+  color: #FFFFFF;
+}
+
+.contain {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
