@@ -4,8 +4,7 @@
 {% endblock %}
 
 {% block content %}
-    {% include "navbar.html" %}
-    <div class="container my-5">
+    <div class="container my-5 wrapper">
         <div class="row">
             <div class="col-sm-6 offset-sm-3">
                 {% from 'bootstrap/form.html' import render_form %}
@@ -13,6 +12,4 @@
             </div>
         </div>
     </div>
-    {% include "flash_message.html" %}
-    {% include "footer.html" %}
 {% endblock %}

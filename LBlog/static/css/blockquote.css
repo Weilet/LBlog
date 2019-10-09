@@ -1,0 +1,22 @@
+@font-face {
+  font-family: 'Source Han Sans Light';
+  font-display: swap;
+  src: url('../font/webfont.woff2') format('woff2'),
+  url('../font/webfont.woff') format('woff');
+}
+
+blockquote {
+    background-size: 85px auto;
+    background: #A32A5C url(quote.svg) no-repeat 20px 20px;
+    padding: 40px 25px 25px 40px;
+    font-size: 28px;
+    line-height: 150%;
+    font-family: 'Source Han Sans Light';
+    color: #FFFFFF;
+}
+
+.contain {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}

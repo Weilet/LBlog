@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}
+    发布
+{% endblock %}
+{% block content %}
+    <div class="container my-5 wrapper">
+        <div class="row my-sm-2 mb-sm-2">
+            <div class="col-sm-6 offset-sm-1">
+                {% from 'bootstrap/form.html' import render_form %}
+                {{ render_form(category_form, form_type='inline') }}
+            </div>
+        </div>
+        <br />
+
+        <div class="row my-sm-2">
+            <div class="col-sm-auto offset-sm-1">
+                {% for category in categories %}
+                    <li class="my-sm-2 list-group-item">
+                        {{ category.name }}
+                        <form action="{{ url_for('blog.del_category', category_id=category.id) }}" class="form-inline" method="post">
+                            <button class="btn btn-outline-info btn-sm">
+                                <a href="#">
+                                    🖊
+                                </a>
+                            </button>
+                            <button class="btn btn-outline-warning btn-sm">
+                                ❌
+                            </button>
+                        </form>
+                    </li>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

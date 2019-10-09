@@ -28,6 +28,18 @@ class DevelopmentConfig(Config):
     def SQLALCHEMY_TRACK_MODIFICATIONS(self):
         return True
 
+    @property
+    def CKEDITOR_ENABLE_CODESNIPPET(self):
+        return True
+
+    @property
+    def CKEDITOR_ENABLE_MARKDOWN(self):
+        return True
+
+    @property
+    def CKEDITOR_PKG_TYPE(self):
+        return 'full'
+
 
 config = defaultdict(DevelopmentConfig, {
     'development': DevelopmentConfig()

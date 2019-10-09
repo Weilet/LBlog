@@ -22,6 +22,7 @@ def login():
             next = request.args.get('next')
             if next is None or not next.startswith('/'):
                 next = url_for('auth.login')
+            flash('登陆成功', 'info')
             return redirect(next)
         flash('用户不存在或密码错误', 'warning')
     return render_template('auth/login.html', login_form=login_form)

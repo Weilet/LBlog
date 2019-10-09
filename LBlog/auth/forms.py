@@ -12,5 +12,5 @@ class LoginForm(FlaskForm):
 
 
 class SettingForm(FlaskForm):
-    name = StringField('用户名', validators=[DataRequired(), Length(1, 70)])
+    name = StringField('修改用户名', validators=[DataRequired(), Length(1, 70)])
     submit = SubmitField('修改')

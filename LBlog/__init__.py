@@ -14,6 +14,7 @@ login_manager.login_view = 'auth.login'
 ckeditor = CKEditor()
 migrate = Migrate()
 
+
 def creat_app(config_name):
     """
     init all extension of the app
