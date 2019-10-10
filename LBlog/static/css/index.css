@@ -1,11 +1,33 @@
+@font-face {
+  font-family: 'Source Han Sans Light';
+  font-display: swap;
+  src: url('../font/webfont.woff2') format('woff2'),
+  url('../font/webfont.woff') format('woff');
+}
+
 html, body {
   height: 100%;
   margin: 0;
 }
 .wrapper {
   min-height: 100%;
-  margin-bottom: -50px;
+  margin-bottom: -10px;
 }
-a {
-  text-decoration: none;
+
+.alert-message {
+  color:#856404;
+  background-color:#fff3cd;
+  border-color:#ffeeba;
+}
+
+.error-content {
+    width: 100%;
+    margin: 0 auto;
+    background-size: 85px auto;
+    background: #9025B0 url(../svg/error.svg) no-repeat 20px 20px;
+    padding: 40px 25px 25px 40px;
+    font-size: 28px;
+    line-height: 150%;
+    font-family: 'Source Han Sans Light', serif;
+    color: #FFFFFF;
 }

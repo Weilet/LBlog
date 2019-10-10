@@ -22,7 +22,5 @@ class CategoryForm(FlaskForm):
     name = StringField('目录名称', validators=[DataRequired(), Length(1, 30)])
     submit = SubmitField('添加目录')
 
-    def validate_name(self, field):
-        if Category.query.filter_by(name=field.data).first():
-            raise ValidationError('Name already exist.')
+
 

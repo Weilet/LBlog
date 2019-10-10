@@ -3,33 +3,50 @@
     发布
 {% endblock %}
 {% block content %}
-    <div class="container my-5 wrapper">
+    <div class="container wrapper">
         <div class="row my-sm-2 mb-sm-2">
             <div class="col-sm-6 offset-sm-1">
+                <label>新建目录：</label>
                 {% from 'bootstrap/form.html' import render_form %}
                 {{ render_form(category_form, form_type='inline') }}
             </div>
         </div>
-        <br />
+        <br/>
 
         <div class="row my-sm-2">
             <div class="col-sm-auto offset-sm-1">
                 {% for category in categories %}
                     <li class="my-sm-2 list-group-item">
-                        {{ category.name }}
-                        <form action="{{ url_for('blog.del_category', category_id=category.id) }}" class="form-inline" method="post">
-                            <button class="btn btn-outline-info btn-sm">
-                                <a href="#">
-                                    🖊
-                                </a>
-                            </button>
-                            <button class="btn btn-outline-warning btn-sm">
-                                ❌
-                            </button>
+                            <span>{{ category.name }}</span>
+                        <button class="btn btn-sm btn-outline-info" onclick="show_check({{ category.id }})">🖊</button>
+                        <form action="{{ url_for('blog.del_category', category_id=category.id) }}" method="post" style="display: inline">
+                            <input type="submit" value="❌" class="btn btn-sm btn-outline-warning">
+                        </form>
+                    </li>
+                    <li class="list-group-item" id="check-{{ category.id }}"
+                        style="display: none">
+                        <form action="{{ url_for('blog.edit_category', category_id=category.id) }}" method="post" class="form-inline">
+                            <label>
+                                <input type="text" class="form-control" name="new_name" placeholder="新的名字">
+                            </label>
+                            <input type="submit" value="✔" class="btn btn-outline-success ml-sm-2">
                         </form>
                     </li>
                 {% endfor %}
             </div>
         </div>
     </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        function show_check(id) {
+            if (document.getElementById('check-'+id).style.display === "none"){
+                document.getElementById('check-'+id).style.display = "block";
+            } else {
+                document.getElementById('check-'+id).style.display = "none";
+            }
+        }
+
+    </script>
 {% endblock %}

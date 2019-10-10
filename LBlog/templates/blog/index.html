@@ -6,17 +6,44 @@
 {% block content %}
     <div class="container-fluid wrapper">
         <div class="row">
-            <div class="col-sm-10 offset-sm-1">
-                {% for post in posts %}
-                    <h2 class="my-sm-2">{{ post.title }}</h2>
-                    <p>{{ post.body | safe | truncate(50, True)}}</p>
-                    <small><a href="{{ url_for('blog.show_post', post_id=post.id) }}">Read More</a></small>
-                    <small style="float: right">{{ post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</small>
-                    {% if not loop.last %}
-                        <hr>
-                    {% endif %}
-                {% endfor %}
-            </div>
+            {% for post in posts %}
+                <div class="col-sm-10 offset-sm-1 mb-sm-2 my-sm-2">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <h2>
+                                {{ post.title }}
+                            </h2>
+                        </div>
+                        {% if current_user.is_authenticated %}
+                        <div class="col-sm-5 justify-content-end my-sm-2">
+                            <form action="{{ url_for('blog.del_post', post_id=post.id) }}" method="post">
+                                <button type="submit" class="btn btn-sm btn-outline-danger float-right">删除</button>
+                            </form>
+                            <form action="{{ url_for('blog.edit_post', post_id=post.id)}}">
+                                <button type="submit" class="btn btn-sm btn-outline-primary float-right mr-sm-2">编辑</button>
+                            </form>
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-auto">
+                            <p>{{ post.body | safe | truncate(50, True) }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <small><a href="{{ url_for('blog.show_post', post_id=post.id) }}">Read More</a></small>
+                        </div>
+                        <div class="col-sm-5 justify-content-end">
+                            <small style="float: right">{{ post.timestamp.strftime('%Y-%m-%d %H:%M:%S') }}</small>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
         </div>
     </div>
+{% endblock %}
+
+{% block script %}
+
 {% endblock %}
