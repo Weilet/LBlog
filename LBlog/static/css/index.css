@@ -1,8 +1,12 @@
 @font-face {
-  font-family: 'Source Han Sans Light';
+  font-family: 'webfont';
   font-display: swap;
-  src: url('../font/webfont.woff2') format('woff2'),
-  url('../font/webfont.woff') format('woff');
+  src: url('//at.alicdn.com/t/webfont_f7g3a1vk1il.eot'); /* IE9*/
+  src: url('//at.alicdn.com/t/webfont_f7g3a1vk1il.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('//at.alicdn.com/t/webfont_f7g3a1vk1il.woff2') format('woff2'),
+  url('//at.alicdn.com/t/webfont_f7g3a1vk1il.woff') format('woff'), /* chrome、firefox */
+  url('//at.alicdn.com/t/webfont_f7g3a1vk1il.ttf') format('truetype'), /* chrome、firefox、opera、Safari, Android, iOS 4.2+*/
+  url('//at.alicdn.com/t/webfont_f7g3a1vk1il.svg#思源黑体-细') format('svg'); /* iOS 4.1- */
 }
 
 html, body {
@@ -28,6 +32,6 @@ html, body {
     padding: 40px 25px 25px 40px;
     font-size: 28px;
     line-height: 150%;
-    font-family: 'Source Han Sans Light', serif;
+    font-family: 'webfont'!important;
     color: #FFFFFF;
 }
