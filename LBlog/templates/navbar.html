@@ -44,8 +44,8 @@
                 <button class="btn btn-outline-info" type="submit">登陆</button>
             </form>
         {% endif %}
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="搜索" aria-label="Search">
+        <form class="form-inline my-2 my-lg-0" action="{{ url_for('blog.search') }}">
+            <input class="form-control mr-sm-2" type="search" placeholder="搜索" aria-label="Search" name="keyword">
             <button class="btn btn-outline-info my-2 my-sm-0" type="submit">搜索</button>
         </form>
     </div>

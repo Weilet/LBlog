@@ -8,7 +8,7 @@ from LBlog import db
 
 @blog_bp.route('/')
 def index():
-    posts = Post.query.all()
+    posts = Post.query.order_by(db.desc(Post.id)).all()
     return render_template('blog/index.html', posts=posts)
 
 
@@ -20,6 +20,13 @@ def friend():
 @blog_bp.route('/about')
 def about():
     return render_template('blog/about.html')
+
+
+@blog_bp.route('/search/', methods=['GET'])
+def search():
+    keyword = request.args['keyword']
+    posts = Post.query.filter(Post.title.contains(keyword) | Post.body.contains(keyword)).all()
+    return render_template('blog/index.html', posts=posts)
 
 
 @blog_bp.route('/post', methods=['GET', 'POST'])
