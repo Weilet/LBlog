@@ -1,5 +1,5 @@
 from flask import flash, render_template, redirect, request, url_for
-from flask_login import login_required
+from flask_login import login_required, current_user
 from . import blog_bp
 from .forms import CategoryForm, PostForm
 from .models import Post, Category
@@ -8,7 +8,7 @@ from LBlog import db
 
 @blog_bp.route('/')
 def index():
-    posts = Post.query.order_by(db.desc(Post.id)).all()
+    posts = Post.query.filter_by(lock=False).order_by(db.desc(Post.id)).all()
     return render_template('blog/index.html', posts=posts)
 
 
@@ -22,7 +22,7 @@ def about():
     return render_template('blog/about.html')
 
 
-@blog_bp.route('/search/', methods=['GET'])
+@blog_bp.route('/search', methods=['GET'])
 def search():
     keyword = request.args['keyword']
     posts = Post.query.filter(Post.title.contains(keyword) | Post.body.contains(keyword)).all()
@@ -38,6 +38,7 @@ def add_post():
         body = post_form.body.data
         category = Category.query.get(post_form.category.data)
         post = Post(title=title, body=body, category=category)
+        post.auth = current_user.username
         db.session.add(post)
         db.session.commit()
         flash('发布成功', 'success')
@@ -77,6 +78,21 @@ def edit_post(post_id):
     return  render_template('blog/add_post.html', post_form=post_form)
 
 
+@blog_bp.route('/post/lock/<int:post_id>', methods=['POST'])
+@login_required
+def lock_post(post_id):
+    post = Post.query.filter_by(id=post_id).first_or_404()
+    post.lock = True
+    db.session.commit()
+    return redirect(url_for('blog.index'))
+
+
+@blog_bp.route('/post/lock/show', methods=['GET'])
+@login_required
+def show_locked_post():
+    posts = Post.query.filter_by(auth=current_user.username).all()
+    return render_template('blog/locked_post.html', posts=posts)
+
 @blog_bp.route('/category', methods=['GET', 'POST'])
 @login_required
 def add_category():
@@ -113,6 +129,5 @@ def edit_category(category_id):
     db.session.commit()
     flash('修改目录成功', 'info')
     return redirect(url_for('blog.add_category'))
-
 
 

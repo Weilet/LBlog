@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from config import config
-from LBlog.extensions import *
+from extensions import *
 from LBlog.auth import auth_bp
 from LBlog.blog import blog_bp
 
@@ -38,3 +38,7 @@ def register_error_handle(app):
     @app.errorhandler(404)
     def page_not_found(e):
         return render_template('error/404.html')
+
+
+# TODO: refactor template with pjax
+# TODO: add a confirmation before deletion

@@ -1,5 +1,6 @@
 from datetime import datetime
 from LBlog import db
+from LBlog.auth.models import User
 
 
 class Category(db.Model):
@@ -24,5 +25,8 @@ class Post(db.Model):
     title = db.Column(db.String(60))
     body = db.Column(db.Text)
     timestamp = db.Column(db.DateTime, default=datetime.utcnow, index=True)
+    lock = db.Column(db.BOOLEAN, default=False)
     category_id = db.Column(db.Integer, db.ForeignKey('categories.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     category = db.relationship('Category', back_populates='posts')
+    auth = db.relationship('User', back_populates='posts')

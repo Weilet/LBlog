@@ -14,19 +14,6 @@
                                 {{ post.title }}
                             </h2>
                         </div>
-                        {% if current_user.is_authenticated %}
-                        <div class="col-sm-5 justify-content-end col-6 my-2">
-                            <form action="{{ url_for('blog.del_post', post_id=post.id) }}" method="post">
-                                <button type="submit" class="btn btn-sm btn-outline-danger float-right">删除</button>
-                            </form>
-                            <form action="{{ url_for('blog.edit_post', post_id=post.id)}}">
-                                <button type="submit" class="btn btn-sm btn-outline-primary float-right mr-2">编辑</button>
-                            </form>
-                            <form action="{{ url_for('blog.lock_post', post_id=post.id)}}">
-                                <button type="submit" class="btn btn-sm btn-outline-primary float-right mr-2">锁定</button>
-                            </form>
-                        </div>
-                        {% endif %}
                     </div>
                     <div class="row">
                         <div class="col-auto">

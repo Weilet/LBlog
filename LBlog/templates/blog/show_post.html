@@ -7,12 +7,14 @@
     <div class="container wrapper">
         <div class="row">
             <div class="col-sm-10 offset-sm-1">
-                <h2 class="my-sm-2">{{ post.title }}</h2>
+                <h2 class="my-2">{{ post.title }}</h2>
             </div>
         </div>
         <hr>
         <div class="row">
-            <div class="col-sm-"></div>
+            <div class="col-sm-10 offset-sm-1">
+                <p>{{ post.body | safe }}</p>
+            </div>
         </div>
     </div>
 {% endblock %}

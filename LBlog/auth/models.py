@@ -1,6 +1,5 @@
 from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
-
 from LBlog import db, login_manager
 
 
@@ -15,7 +14,7 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(64), unique=True, index=True)
     about = db.Column(db.Text)
     password_hash = db.Column(db.String(128))
-
+    posts = db.relationship('Post',back_populates='auth')
     @property
     def password(self):
         raise AttributeError('密码是只读的')
