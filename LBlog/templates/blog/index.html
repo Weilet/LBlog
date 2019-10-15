@@ -1,4 +1,6 @@
 {% extends "base.html" %}
+{% from "blog/del_popup.html" import del %}
+{% from "blog/lock_popup.html" import lock %}
 {% block title %}
     主页
 {% endblock %}
@@ -15,17 +17,18 @@
                             </h2>
                         </div>
                         {% if current_user.is_authenticated %}
-                        <div class="col-sm-5 justify-content-end col-6 my-2">
-                            <form action="{{ url_for('blog.del_post', post_id=post.id) }}" method="post">
-                                <button type="submit" class="btn btn-sm btn-outline-danger float-right">删除</button>
-                            </form>
-                            <form action="{{ url_for('blog.edit_post', post_id=post.id)}}">
-                                <button type="submit" class="btn btn-sm btn-outline-primary float-right mr-2">编辑</button>
-                            </form>
-                            <form action="{{ url_for('blog.lock_post', post_id=post.id)}}">
-                                <button type="submit" class="btn btn-sm btn-outline-primary float-right mr-2">锁定</button>
-                            </form>
-                        </div>
+                            <div class="col-sm-5 justify-content-end col-6 my-2">
+                                <button class="btn btn-sm btn-outline-danger float-right"
+                                        data-toggle="modal" data-target="#del_confirm">删除
+                                </button>
+                                <form action="{{ url_for('blog.edit_post', post_id=post.id) }}">
+                                    <button type="submit" class="btn btn-sm btn-outline-primary float-right mr-2">编辑
+                                    </button>
+                                </form>
+                                <button class="btn btn-sm btn-outline-primary float-right mr-2"
+                                        data-toggle="modal" data-target="#lock_confirm">锁定
+                                </button>
+                            </div>
                         {% endif %}
                     </div>
                     <div class="row">
@@ -44,12 +47,10 @@
                     {% if not loop.last %}
                         <hr/>
                     {% endif %}
+                    {{ del(post.id) }}
+                    {{ lock(post.id) }}
                 </div>
             {% endfor %}
         </div>
     </div>
-{% endblock %}
-
-{% block script %}
-
 {% endblock %}

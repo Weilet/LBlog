@@ -4,6 +4,7 @@ from . import blog_bp
 from .forms import CategoryForm, PostForm
 from .models import Post, Category
 from LBlog import db
+from LBlog.auth.models import User
 
 
 @blog_bp.route('/')
@@ -37,8 +38,8 @@ def add_post():
         title = post_form.title.data
         body = post_form.body.data
         category = Category.query.get(post_form.category.data)
-        post = Post(title=title, body=body, category=category)
-        post.auth = current_user.username
+        auth = User.query.get(current_user.username)
+        post = Post(title=title, body=body, category=category, auth=auth)
         db.session.add(post)
         db.session.commit()
         flash('发布成功', 'success')
@@ -90,8 +91,10 @@ def lock_post(post_id):
 @blog_bp.route('/post/lock/show', methods=['GET'])
 @login_required
 def show_locked_post():
-    posts = Post.query.filter_by(auth=current_user.username).all()
+    auth = User.query.get(current_user.username)
+    posts = Post.query.filter_by(auth=auth).all()
     return render_template('blog/locked_post.html', posts=posts)
+
 
 @blog_bp.route('/category', methods=['GET', 'POST'])
 @login_required
